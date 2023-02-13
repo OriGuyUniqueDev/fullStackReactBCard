@@ -1,43 +1,85 @@
-import { Box, Typography, TextField, Button, Grid } from "@mui/material";
-import { Dispatch, FunctionComponent, SetStateAction } from "react";
+import { Box, Typography, Button, Grid, Stepper, Step, StepLabel } from "@mui/material";
+import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
 import * as yup from "yup";
+import PersonalInfo from "./personaInfo/PersonalInfo";
+import UserInfo from "./userInfo/UserInfo";
 
 interface RegisterProps {
 	setLogin: Dispatch<SetStateAction<boolean>>;
 }
 
 const Register: FunctionComponent<RegisterProps> = ({ setLogin }) => {
-	const validationSchema = yup.object({
-		email: yup.string().email("Enter a valid email").required("Email is required"),
-		password: yup.string().min(8, "Password should be of minimum 8 characters length").required("Password is required"),
-		firstName: yup.string().min(2).required(),
-		lastName: yup.string().min(2).required(),
-		imgUrl: yup.string().min(2).required(),
-		imgAlt: yup.string().min(2).required(),
-		state: yup.string().min(2),
-		country: yup.string().min(2).required(),
-		city: yup.string().min(2).required(),
-		street: yup.string().min(2).required(),
-		houseNumber: yup.string().min(2).required(),
-		zip: yup.number().min(7),
-		biz: yup.boolean(),
-		phone: yup.string().min(10).required(),
-	});
+	const [activeStep, setActiveStep] = useState(0);
+	const URLTOMATCH = new RegExp(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/);
+
+	const validationSchemaArr = [
+		yup.object({ firstName: yup.string().min(2).required(), lastName: yup.string().min(2).required(), state: yup.string().min(2), country: yup.string().min(2).required(), city: yup.string().min(2).required(), street: yup.string().min(2).required(), houseNumber: yup.number().integer().required(), zip: yup.number().min(7), phone: yup.string().min(10).required(), imgUrl: yup.string().matches(URLTOMATCH, "Enter  a valid URL") }),
+		yup.object({
+			email: yup.string().email("Enter a valid email").required("Email is required"),
+			password: yup.string().min(8, "Password should be of minimum 8 characters length").required("Password is required"),
+			confirmPassword: yup
+				.string()
+				.oneOf([yup.ref("password")], "Password should be the same")
+				.min(8, "Password should be of minimum 8 characters length")
+				.required("Confirm Password is required"),
+			biz: yup.boolean(),
+		}),
+	];
+
+	const handleBack = () => {
+		setActiveStep((prevStep) => prevStep - 1);
+	};
+	// const validationSchema = validationSchemaArr[activeStep]
+
 	const formik = useFormik({
 		initialValues: {
-			email: "foobar@example.com",
-			password: "foobar",
+			email: "",
+			password: "",
+			confirmPassword: "",
+			firstName: "",
+			lastName: "",
+			imgUrl: "",
+			imgAlt: "",
+			state: "",
+			country: "",
+			city: "",
+			street: "",
+			houseNumber: "",
+			zip: "",
+			biz: false,
+			phone: "",
 		},
-		validationSchema: validationSchema,
+		validationSchema: validationSchemaArr[activeStep],
 		onSubmit: (values) => {
 			console.log(values);
+
+			if (activeStep === steps.length - 1) {
+				if (values.password === values.confirmPassword) {
+					setTimeout(() => {
+						setActiveStep((prevStep) => prevStep + 1);
+					}, 2500);
+				}
+			} else {
+				setActiveStep((prevStep) => prevStep + 1);
+			}
 		},
 	});
 	const handleClickRegister = () => {
 		setLogin(true);
 	};
+	const steps = ["Personal Info", "User Info"];
+	const formContent = (step: number) => {
+		switch (step) {
+			case 0:
+				return <PersonalInfo formik={formik} />;
+			case 1:
+				return <UserInfo formik={formik} />;
+			default:
+				return <div>{formik.values.firstName + " " + formik.values.lastName} Yay your registered, we'll direct you</div>;
+		}
+	};
+
 	return (
 		<Grid
 			item
@@ -45,7 +87,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setLogin }) => {
 			sm={8}
 			md={5}
 			component="div"
-			sx={{ height: "full", alignSelf: "center" }}
+			sx={{ width: "70%", alignSelf: "center", flexGrow: 1 }}
 		>
 			<Box
 				sx={{
@@ -64,225 +106,51 @@ const Register: FunctionComponent<RegisterProps> = ({ setLogin }) => {
 				>
 					Lets, Sign Up
 				</Typography>
-				<Typography
-					component="h3"
-					variant="h6"
+				<Stepper
+					activeStep={activeStep}
+					alternativeLabel
 				>
-					Personal Info
-				</Typography>
+					{steps.map((label, index) => (
+						<Step key={index}>
+							<StepLabel>{label}</StepLabel>
+						</Step>
+					))}
+				</Stepper>
 				<Grid
-					container
 					component="form"
 					onSubmit={formik.handleSubmit}
-					sx={{ width: "80%", justifyContent: "space-between" }}
-					gridColumn={2}
+					noValidate
 				>
-					<Grid
-						item
-						xs={6}
+					{formContent(activeStep)}
+					<Box
+						display={activeStep === 2 ? "none" : "flex"}
+						sx={{ justifyContent: "center", gap: 2 }}
 					>
-						<TextField
-							margin="normal"
-							required
-							type="text"
-							id="firstName"
-							label="First Name"
-							name="firstName"
-							autoComplete="firstName"
-							autoFocus
-						/>
-					</Grid>
-					<Grid
-						item
-						xs={6}
-					>
-						<TextField
-							margin="normal"
-							required
-							type="text"
-							id="lastName"
-							label="Last Name"
-							name="lastName"
-							autoComplete="lastName"
-						/>
-					</Grid>
-					<Grid
-						item
-						xs={12}
-					>
-						<TextField
-							margin="normal"
-							required
-							type="text"
-							id="phone"
-							label="Phone"
-							name="phone"
-							autoComplete="phone"
-						/>
-					</Grid>
+						<Button
+							type="button"
+							variant="contained"
+							size="large"
+							id="submitButton"
+							sx={{ mt: 3, mb: 2, paddingBlock: 2 }}
+							disabled={activeStep === 0}
+							onClick={handleBack}
+						>
+							Back
+						</Button>
+						<Button
+							type={"submit"}
+							variant="contained"
+							size="large"
+							id="submitButton"
+							sx={{ mt: 3, mb: 2, paddingBlock: 2 }}
+						>
+							{activeStep === 1 ? "Submit" : "Continue"}
+						</Button>
+					</Box>
 				</Grid>
-
-				<Link
-					to={""}
-					onClick={handleClickRegister}
-					style={{ color: "white", textDecoration: "none", width: "100%", textAlign: "right", marginTop: 8 }}
-				>
-					Already Our Friend? let's Login
-				</Link>
-
-				<Button
-					type="submit"
-					fullWidth
-					variant="contained"
-					size="large"
-					id="submitButton"
-					sx={{ mt: 3, mb: 2, paddingBlock: 2 }}
-					disabled={formik.dirty && !formik.isValid}
-				>
-					Sign In
-				</Button>
 			</Box>
 		</Grid>
 	);
 };
 
 export default Register;
-
-{
-	/* <Grid
-						item
-						xs={12}
-					>
-						<TextField
-							margin="normal"
-							required
-							type="text"
-							id="firstName"
-							label="First Name"
-							name="firstName"
-							autoComplete="firstName"
-							autoFocus
-						/>
-					</Grid>
-					<Grid item>
-						<TextField
-							margin="normal"
-							required
-							type="text"
-							id="firstName"
-							label="First Name"
-							name="firstName"
-							autoComplete="firstName"
-							autoFocus
-						/>
-					</Grid>
-					<Grid item>
-						<TextField
-							margin="normal"
-							required
-							type="text"
-							id="firstName"
-							label="First Name"
-							name="firstName"
-							autoComplete="firstName"
-							autoFocus
-						/>
-					</Grid>
-					<Grid item>
-						<TextField
-							margin="normal"
-							required
-							type="text"
-							id="firstName"
-							label="First Name"
-							name="firstName"
-							autoComplete="firstName"
-							autoFocus
-						/>
-					</Grid>
-					<Grid item>
-						<TextField
-							margin="normal"
-							required
-							type="text"
-							id="firstName"
-							label="First Name"
-							name="firstName"
-							autoComplete="firstName"
-							autoFocus
-						/>
-					</Grid>
-					<Grid item>
-						<TextField
-							margin="normal"
-							required
-							type="text"
-							id="firstName"
-							label="First Name"
-							name="firstName"
-							autoComplete="firstName"
-							autoFocus
-						/>
-					</Grid>
-					<Grid item>
-						<TextField
-							margin="normal"
-							required
-							type="text"
-							id="firstName"
-							label="First Name"
-							name="firstName"
-							autoComplete="firstName"
-							autoFocus
-						/>
-					</Grid>
-					<Grid item>
-						<TextField
-							margin="normal"
-							required
-							type="text"
-							id="firstName"
-							label="First Name"
-							name="firstName"
-							autoComplete="firstName"
-							autoFocus
-						/>
-					</Grid>
-					<Grid item>
-						<TextField
-							margin="normal"
-							required
-							type="text"
-							id="firstName"
-							label="First Name"
-							name="firstName"
-							autoComplete="firstName"
-							autoFocus
-						/>
-					</Grid>
-					<TextField
-						onChange={formik.handleChange}
-						error={formik.touched.email && Boolean(formik.errors.email)}
-						helperText={formik.touched.email && formik.errors.email}
-						margin="normal"
-						required
-						type="email"
-						id="email"
-						label="Email Address"
-						name="email"
-						autoComplete="email"
-						autoFocus
-					/>
-					<TextField
-						onChange={formik.handleChange}
-						error={formik.touched.password && Boolean(formik.errors.password)}
-						helperText={formik.touched.password && formik.errors.password}
-						margin="normal"
-						required
-						name="password"
-						label="Password"
-						type="password"
-						id="password"
-						autoComplete="current-password"
-					/> */
-}
