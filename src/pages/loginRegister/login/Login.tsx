@@ -1,15 +1,18 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { Button, CircularProgress, Grid, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useFormik } from "formik";
-import { Dispatch, FunctionComponent, SetStateAction } from "react";
+import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
+import { loginUser } from "../../../services/userCRUD";
 
 interface LoginProps {
 	setLogin: Dispatch<SetStateAction<boolean>>;
 }
 
 const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
+	const [isLoading, setLoading] = useState<boolean>(false);
+
 	const validationSchema = yup.object({
 		email: yup.string().email("Enter a valid email").required("Email is required"),
 		password: yup.string().min(8, "Password should be of minimum 8 characters length").required("Password is required"),
@@ -21,7 +24,12 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 		},
 		validationSchema: validationSchema,
 		onSubmit: (values) => {
-			console.log(values);
+			setLoading(true);
+			loginUser(values)
+				?.then((res) => {
+					setLoading(false);
+				})
+				.catch((err) => err);
 		},
 	});
 	const handleClickLogin = () => {
@@ -101,7 +109,7 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 						sx={{ mt: 3, mb: 2, paddingBlock: 2 }}
 						disabled={formik.dirty && !formik.isValid}
 					>
-						Sign In
+						{isLoading ? <CircularProgress color="info" /> : "Sign In"}
 					</Button>
 				</Box>
 			</Box>
