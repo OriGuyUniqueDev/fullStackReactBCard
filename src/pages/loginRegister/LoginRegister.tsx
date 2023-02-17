@@ -1,12 +1,21 @@
 import { Grid } from "@mui/material";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
+import { useLoggedIn } from "../../contexts/LoggedInProvider";
 import Login from "./login/Login";
 import Register from "./register/Register";
+import { redirect, useNavigate } from "react-router-dom";
 
 interface LoginRegisterProps {}
 
 const LoginRegister: FunctionComponent<LoginRegisterProps> = () => {
 	const [loginPage, setLoginRegisterPage] = useState<boolean>(true);
+	const navigate = useNavigate();
+	const { isLoggedIn } = useLoggedIn();
+	useEffect(() => {
+		console.log("render LoginRegister");
+		console.log(isLoggedIn);
+		isLoggedIn && navigate("/welcome");
+	}, []);
 	return (
 		<Grid
 			container
@@ -24,7 +33,7 @@ const LoginRegister: FunctionComponent<LoginRegisterProps> = () => {
 					backgroundPosition: "center",
 				}}
 			></Grid>
-			{loginPage ? <Login setLogin={setLoginRegisterPage} /> : <Register setLogin={setLoginRegisterPage} />}
+			{loginPage ? <Login setLogin={setLoginRegisterPage} /> : <Register setLoginPage={setLoginRegisterPage} />}
 		</Grid>
 	);
 };

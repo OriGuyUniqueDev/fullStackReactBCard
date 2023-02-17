@@ -1,6 +1,7 @@
 import { createTheme, CssBaseline, ThemeProvider, useTheme } from "@mui/material";
 import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router-dom";
-import LoginRegister from "./pages/loginRegister/LoginRegister";
+import LoggedInProvider, { useLoggedIn } from "./contexts/LoggedInProvider";
+import Layout from "./layout/Layout";
 import Router from "./routes/Router";
 
 function App() {
@@ -38,13 +39,18 @@ function App() {
 			},
 		},
 	});
-
 	return (
 		<div className="App">
 			<ThemeProvider theme={darkTheme}>
 				<BrowserRouter>
-					<CssBaseline />
-					<Router />
+					<LoggedInProvider>
+						<>
+							<CssBaseline />
+							<Layout>
+								<Router />
+							</Layout>
+						</>
+					</LoggedInProvider>
 				</BrowserRouter>
 			</ThemeProvider>
 		</div>

@@ -6,14 +6,20 @@ import PersonalInfo from "./personaInfo/PersonalInfo";
 import UserInfo from "./userInfo/UserInfo";
 import { registerUser } from "../../../services/userCRUD";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Success from "./success/Success";
+import { useLoggedIn } from "../../../contexts/LoggedInProvider";
+import { redirect, useNavigate } from "react-router-dom";
 
 interface RegisterProps {
-	setLogin: Dispatch<SetStateAction<boolean>>;
+	setLoginPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Register: FunctionComponent<RegisterProps> = ({ setLogin }) => {
+const Register: FunctionComponent<RegisterProps> = ({ setLoginPage }) => {
 	const [activeStep, setActiveStep] = useState(0);
 	const [isLoading, setLoading] = useState<boolean>(false);
+	const { isLoggedIn, setLoggedIn } = useLoggedIn();
+	const navigate = useNavigate();
+
 	const URLTOMATCH = new RegExp(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/);
 
 	const validationSchemaArr = [
@@ -31,10 +37,8 @@ const Register: FunctionComponent<RegisterProps> = ({ setLogin }) => {
 	];
 
 	const handleBack = () => {
-		setActiveStep((prevStep) => prevStep - 1);
+		setLoginPage(true);
 	};
-	// const validationSchema = validationSchemaArr[activeStep]
-
 	const formik = useFormik({
 		initialValues: {
 			email: "",
@@ -62,7 +66,11 @@ const Register: FunctionComponent<RegisterProps> = ({ setLogin }) => {
 					const { confirmPassword, ...dataToServer } = values;
 					setLoading(true);
 					await registerUser(dataToServer)
-						?.then((data) => {
+						?.then((res) => {
+							console.log(res.data.token);
+
+							sessionStorage.setItem("ent", res.data.token);
+							setLoggedIn(true);
 							setActiveStep((prevStep) => prevStep + 1);
 						})
 						.catch((err) => err.response.data);
@@ -74,7 +82,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setLogin }) => {
 		},
 	});
 	const handleClickRegister = () => {
-		setLogin(true);
+		setLoggedIn(true);
 	};
 	const steps = ["Personal Info", "User Info"];
 	const formContent = (step: number) => {
@@ -84,7 +92,12 @@ const Register: FunctionComponent<RegisterProps> = ({ setLogin }) => {
 			case 1:
 				return <UserInfo formik={formik} />;
 			default:
-				return <div>{formik.values.firstName + " " + formik.values.lastName} Yay your registered, we'll direct you</div>;
+				return (
+					<Success
+						firstName={formik.values.firstName}
+						lastName={formik.values.lastName}
+					/>
+				);
 		}
 	};
 
@@ -108,8 +121,14 @@ const Register: FunctionComponent<RegisterProps> = ({ setLogin }) => {
 				}}
 			>
 				<Button
-					onClick={handleClickRegister}
-					sx={{ marginRight: "auto", color: "white" }}
+					onClick={handleBack}
+					sx={{
+						marginRight: "auto",
+						color: "white",
+						display: () => {
+							return activeStep === 2 ? "none" : "block";
+						},
+					}}
 				>
 					<ArrowBackIcon />
 				</Button>

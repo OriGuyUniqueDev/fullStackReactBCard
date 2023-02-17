@@ -2,8 +2,10 @@ import { Button, CircularProgress, Grid, TextField, Typography } from "@mui/mate
 import { Box } from "@mui/system";
 import { useFormik } from "formik";
 import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import ToastMessage from "../../../components/ToastMessage";
+import { useLoggedIn } from "../../../contexts/LoggedInProvider";
 import { loginUser } from "../../../services/userCRUD";
 
 interface LoginProps {
@@ -12,6 +14,10 @@ interface LoginProps {
 
 const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 	const [isLoading, setLoading] = useState<boolean>(false);
+	const [snackOpen, setSnackOpen] = useState<boolean>(false);
+	const [errMessage, setErrMessage] = useState<string>("");
+	const navigate = useNavigate();
+	const { isLoggedIn, setLoggedIn } = useLoggedIn();
 
 	const validationSchema = yup.object({
 		email: yup.string().email("Enter a valid email").required("Email is required"),
@@ -28,8 +34,16 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 			loginUser(values)
 				?.then((res) => {
 					setLoading(false);
+					setLoggedIn(true);
+					sessionStorage.setItem("ent", res.data.token);
+					navigate("/welcome");
 				})
-				.catch((err) => err);
+				.catch((err) => {
+					setErrMessage(err.response.data);
+					setSnackOpen((prev) => !prev);
+
+					setLoading(false);
+				});
 		},
 	});
 	const handleClickLogin = () => {
@@ -45,6 +59,11 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 			component="div"
 			sx={{ height: "full", alignSelf: "center" }}
 		>
+			<ToastMessage
+				setSnackOpen={setSnackOpen}
+				snackOpen={snackOpen}
+				message={errMessage}
+			/>
 			<Box
 				sx={{
 					my: 8,
