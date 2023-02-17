@@ -67,8 +67,6 @@ const Register: FunctionComponent<RegisterProps> = ({ setLoginPage }) => {
 					setLoading(true);
 					await registerUser(dataToServer)
 						?.then((res) => {
-							console.log(res.data.token);
-
 							sessionStorage.setItem("ent", res.data.token);
 							setLoggedIn(true);
 							setActiveStep((prevStep) => prevStep + 1);

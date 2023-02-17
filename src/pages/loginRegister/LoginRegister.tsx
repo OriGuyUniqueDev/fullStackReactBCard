@@ -12,8 +12,6 @@ const LoginRegister: FunctionComponent<LoginRegisterProps> = () => {
 	const navigate = useNavigate();
 	const { isLoggedIn } = useLoggedIn();
 	useEffect(() => {
-		console.log("render LoginRegister");
-		console.log(isLoggedIn);
 		isLoggedIn && navigate("/welcome");
 	}, []);
 	return (

@@ -35,7 +35,7 @@ export const LoggedInProvider: FC<LoggedInProps> = ({ children }) => {
 				setLoggedIn(false);
 				navigate("/");
 			});
-	}, [user]);
+	}, []);
 
 	return <LoggedInContext.Provider value={{ isLoggedIn, setLoggedIn, user }}>{children}</LoggedInContext.Provider>;
 };

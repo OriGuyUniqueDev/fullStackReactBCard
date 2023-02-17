@@ -1,6 +1,5 @@
 import axios from "axios";
-import { FunctionComponent, useEffect, useState } from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { FunctionComponent } from "react";
 import { useLoggedIn } from "../../contexts/LoggedInProvider";
 
 interface WelcomeProps {}
