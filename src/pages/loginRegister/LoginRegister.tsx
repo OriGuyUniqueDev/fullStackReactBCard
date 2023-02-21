@@ -1,15 +1,18 @@
-import { Grid, Skeleton } from "@mui/material";
+import { Grid, Skeleton, useTheme } from "@mui/material";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useLoggedIn } from "../../contexts/LoggedInProvider";
 import Login from "./login/Login";
 import Register from "./register/Register";
 import { redirect, useNavigate } from "react-router-dom";
+import { useColorMode } from "../../contexts/ColorModeProvider";
 
 interface LoginRegisterProps {}
 
 const LoginRegister: FunctionComponent<LoginRegisterProps> = () => {
 	const [loginPage, setLoginRegisterPage] = useState<boolean>(true);
 	const [backgroundLoaded, setBackgroundLoaded] = useState<boolean>(false);
+	const { setBgColor } = useColorMode();
+	const theme = useTheme();
 	const navigate = useNavigate();
 	const { isLoggedIn } = useLoggedIn();
 	const styles = {
@@ -23,6 +26,7 @@ const LoginRegister: FunctionComponent<LoginRegisterProps> = () => {
 	};
 	useEffect(() => {
 		isLoggedIn && navigate("/welcome");
+		setBgColor(theme.palette.background.default);
 	}, []);
 	return (
 		<Grid

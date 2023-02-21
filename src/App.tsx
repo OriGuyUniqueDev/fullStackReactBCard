@@ -1,26 +1,48 @@
 import { createTheme, CssBaseline, ThemeProvider, useTheme } from "@mui/material";
+import { useState } from "react";
 import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ColorModeProvider, useColorMode } from "./contexts/ColorModeProvider";
 import LoggedInProvider, { useLoggedIn } from "./contexts/LoggedInProvider";
 import Layout from "./layout/Layout";
 import Router from "./routes/Router";
 
 function App() {
 	const themeUse = useTheme();
+	themeUse.palette.mode = "dark";
+	const { colorMode, bgcolor } = useColorMode();
 	const darkTheme = createTheme({
 		palette: {
 			mode: "dark",
 			primary: {
-				main: "#7B4DFF",
+				main: "#3F51B5",
+				contrastText: "#FFFFFF",
 			},
 			secondary: {
-				main: "#00B5D8",
+				main: "#E91E63",
+				contrastText: "#FFFFFF",
+			},
+			error: {
+				main: "#F44336",
+				contrastText: "#FFFFFF",
+			},
+			warning: {
+				main: "#FFC107",
+				contrastText: "#000000",
+			},
+			info: {
+				main: "#2196F3",
+				contrastText: "#FFFFFF",
 			},
 			success: {
-				main: "#6F78E3",
+				main: "#4CAF50",
+				contrastText: "#FFFFFF",
 			},
 			background: {
 				default: "#1A202C",
 				paper: "#1A202C",
+			},
+			text: {
+				primary: "#FFFFFF",
 			},
 		},
 	});
@@ -28,20 +50,45 @@ function App() {
 		palette: {
 			mode: "light",
 			primary: {
-				main: "#1976d2",
+				main: "#3F51B5",
+				contrastText: "#FFFFFF",
 			},
 			secondary: {
-				main: "rgb(220, 0, 78)",
+				main: "#E91E63",
+				contrastText: "#FFFFFF",
+			},
+			error: {
+				main: "#F44336",
+				contrastText: "#FFFFFF",
+			},
+			warning: {
+				main: "#FFC107",
+				contrastText: "#000000",
+			},
+			info: {
+				main: "#2196F3",
+				contrastText: "#FFFFFF",
+			},
+			success: {
+				main: "#4CAF50",
+				contrastText: "#FFFFFF",
 			},
 			background: {
-				default: "#F7F7F0",
-				paper: "#FFFDFA",
+				default: "#f5f5e8",
+				paper: "#f5f5e8",
+			},
+			text: {
+				primary: "#333333",
+				secondary: "#FFFFFF",
 			},
 		},
 	});
 	return (
-		<div className="App">
-			<ThemeProvider theme={darkTheme}>
+		<div
+			className="App"
+			style={{ background: bgcolor }}
+		>
+			<ThemeProvider theme={colorMode === "dark" ? darkTheme : lightTheme}>
 				<BrowserRouter>
 					<LoggedInProvider>
 						<>

@@ -1,4 +1,4 @@
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, useTheme } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
@@ -11,6 +11,7 @@ interface FooterProps {}
 
 const Footer: FunctionComponent<FooterProps> = () => {
 	const navigate = useNavigate();
+	const theme = useTheme();
 	const { isLoggedIn } = useLoggedIn();
 
 	return (
@@ -20,35 +21,35 @@ const Footer: FunctionComponent<FooterProps> = () => {
 				sx={{
 					position: "sticky",
 					height: "4rem",
-					backgroundColor: "primary",
+					backgroundColor: "transparent",
 					display: () => {
-						return isLoggedIn ? { md: "flex", xs: "none" } : "none";
+						return isLoggedIn ? { md: "flex" } : "none";
 					},
 				}}
 			>
 				<BottomNavigationAction
-					sx={{ color: "background.text" }}
+					sx={{ color: theme.palette.text.primary }}
 					label="About"
 					value="About"
-					icon={<InfoIcon color="primary" />}
+					icon={<InfoIcon />}
 					onClick={() => {
 						navigate(ROUTES.ABOUT);
 					}}
 				></BottomNavigationAction>
 				<BottomNavigationAction
-					sx={{ color: "background.text" }}
+					sx={{ color: theme.palette.text.primary }}
 					label="Favorites"
 					value="Favorites"
-					icon={<FavoriteIcon color="primary" />}
+					icon={<FavoriteIcon />}
 					onClick={() => {
 						navigate(ROUTES.FAV_CARDS);
 					}}
 				></BottomNavigationAction>
 				<BottomNavigationAction
-					sx={{ color: "background.text" }}
+					sx={{ color: theme.palette.text.primary }}
 					label="My Cards"
 					value="My Cards"
-					icon={<LibraryBooksIcon color="primary" />}
+					icon={<LibraryBooksIcon />}
 					onClick={() => {
 						navigate(ROUTES.CARDS);
 					}}

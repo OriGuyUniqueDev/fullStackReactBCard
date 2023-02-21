@@ -20,3 +20,15 @@ export const loginUser = (data: LoginType) => {
 		error;
 	}
 };
+export const getAllCards = async () => {
+	try {
+		let response = await axios.get("http://localhost:5000/api/getAllCards", {
+			headers: {
+				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
+			},
+		});
+		return response;
+	} catch (error) {
+		error;
+	}
+};

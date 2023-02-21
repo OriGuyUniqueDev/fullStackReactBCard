@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useState, useContext, createContext, FC, useEffect } from "react";
 import { redirect, useNavigate } from "react-router-dom";
+import UserType from "../interfaces/User";
 
 type LoggedInContextType = {
 	isLoggedIn: boolean;
 	setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-	user: { email: string; biz: boolean };
+	user: UserType | null;
 };
 
 const LoggedInContext = createContext<LoggedInContextType | null>(null);
@@ -17,25 +18,30 @@ type LoggedInProps = {
 export const LoggedInProvider: FC<LoggedInProps> = ({ children }) => {
 	const navigate = useNavigate();
 	const [isLoggedIn, setLoggedIn] = useState(false);
-	const [user, setUser] = useState<LoggedInContextType["user"]>({ email: "", biz: false });
+	const [user, setUser] = useState<LoggedInContextType["user"]>(null);
+	const token = sessionStorage.getItem("ent");
 
 	useEffect(() => {
-		axios
-			.get("http://localhost:5000/api/login", {
-				headers: {
-					Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
-				},
-			})
-			.then((res) => {
-				setUser(res.data);
-				setLoggedIn(true);
-				navigate("/welcome");
-			})
-			.catch((err) => {
-				setLoggedIn(false);
-				navigate("/");
-			});
-	}, []);
+		if (token)
+			axios
+				.get("http://localhost:5000/api/login", {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				})
+				.then((res) => {
+					setUser(res.data);
+					setLoggedIn(true);
+				})
+				.finally(() => navigate("/welcome"))
+				.catch((err) => {
+					setLoggedIn(false);
+					navigate("/");
+				});
+
+		setLoggedIn(false);
+		navigate("/");
+	}, [token]);
 
 	return <LoggedInContext.Provider value={{ isLoggedIn, setLoggedIn, user }}>{children}</LoggedInContext.Provider>;
 };
