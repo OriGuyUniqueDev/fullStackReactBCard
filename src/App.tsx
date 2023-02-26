@@ -1,6 +1,6 @@
 import { createTheme, CssBaseline, ThemeProvider, useTheme } from "@mui/material";
 import { useState } from "react";
-import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, createBrowserRouter, HashRouter, RouterProvider } from "react-router-dom";
 import { ColorModeProvider, useColorMode } from "./contexts/ColorModeProvider";
 import LoggedInProvider, { useLoggedIn } from "./contexts/LoggedInProvider";
 import { ToastProvider } from "./contexts/ToastProvider";
@@ -93,7 +93,7 @@ function App() {
 		>
 			<ToastProvider>
 				<ThemeProvider theme={colorMode === "dark" ? darkTheme : lightTheme}>
-					<BrowserRouter>
+					<HashRouter>
 						<LoggedInProvider>
 							<>
 								<CssBaseline />
@@ -102,7 +102,10 @@ function App() {
 								</Layout>
 							</>
 						</LoggedInProvider>
-					</BrowserRouter>
+					</HashRouter>
+					{/* <BrowserRouter>
+						
+					</BrowserRouter> */}
 				</ThemeProvider>
 			</ToastProvider>
 		</div>
