@@ -12,4 +12,5 @@ export default interface CardType {
 	likes?: string[];
 	_id?: string;
 	userId?: string;
+	uniqueNum?: number;
 }

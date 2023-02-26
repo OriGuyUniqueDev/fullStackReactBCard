@@ -65,7 +65,7 @@ const CardBody: FunctionComponent<CardBodyProps> = ({ data }) => {
 					variant="body2"
 					component="div"
 				>
-					{data.uniqueNum}
+					{data?.uniqueNum}
 				</Typography>
 			</Box>
 		</CardContent>
