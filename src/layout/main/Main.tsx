@@ -8,7 +8,7 @@ interface MainProps {
 
 const Main: FunctionComponent<MainProps> = ({ children }) => {
 	const { isLoggedIn } = useLoggedIn();
-	return <Box sx={{ height: () => (isLoggedIn ? "86vh" : "100vh"), overflowY: () => (isLoggedIn ? "scroll" : "hidden"), overflowX: "hidden" }}>{children}</Box>;
+	return <Box sx={{ height: () => (isLoggedIn ? "86vh" : "100vh"), overflowY: "scroll", overflowX: "hidden" }}>{children}</Box>;
 };
 
 export default Main;

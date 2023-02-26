@@ -34,7 +34,13 @@ const Header: FunctionComponent<HeaderProps> = ({}) => {
 			</AppBar>
 			<AppBar
 				color="default"
-				sx={{ height: "5rem", display: { md: "none", xs: "flex" }, justifyContent: "center" }}
+				sx={{
+					height: "5rem",
+					display: () => {
+						return isLoggedIn ? { md: "none", xs: "flex" } : "none";
+					},
+					justifyContent: "center",
+				}}
 				position="relative"
 			>
 				<MobileNav />
