@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import ToastMessage from "../../../components/ToastMessage";
 import { useLoggedIn } from "../../../contexts/LoggedInProvider";
+import { useToast } from "../../../contexts/ToastProvider";
 import { loginUser } from "../../../services/userCRUD";
 
 interface LoginProps {
@@ -14,10 +15,10 @@ interface LoginProps {
 
 const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 	const [isLoading, setLoading] = useState<boolean>(false);
-	const [snackOpen, setSnackOpen] = useState<boolean>(false);
 	const [errMessage, setErrMessage] = useState<string>("");
 	const navigate = useNavigate();
 	const { isLoggedIn, setLoggedIn } = useLoggedIn();
+	const { setMessage, setSnackOpen, setType } = useToast();
 
 	const validationSchema = yup.object({
 		email: yup.string().email("Enter a valid email").required("Email is required"),
@@ -37,11 +38,15 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 					setLoggedIn(true);
 					sessionStorage.setItem("ent", res.data.token);
 					navigate("/welcome");
-				})
-				.catch((err) => {
-					setErrMessage(err.response.data);
 					setSnackOpen((prev) => !prev);
+					setType("success");
+					setMessage("Great You'r Logged In, We'll Direct You ⭐");
+				})
 
+				.catch((err) => {
+					setMessage(err.response.data);
+					setSnackOpen((prev) => !prev);
+					setType("error");
 					setLoading(false);
 				});
 		},
@@ -59,11 +64,6 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 			component="div"
 			sx={{ height: "full", alignSelf: "center" }}
 		>
-			<ToastMessage
-				setSnackOpen={setSnackOpen}
-				snackOpen={snackOpen}
-				message={errMessage}
-			/>
 			<Box
 				sx={{
 					my: 8,

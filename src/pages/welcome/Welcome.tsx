@@ -16,9 +16,7 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
 	const userHeroText = 'You can use this dashboard to discover and save your favorite businesses in one convenient place. Browse the latest business cards and add them to your favorites to keep track of their updates. You can also visit the "About" section to learn more about the author of this project.';
 	const bizHeroText = "You can use this dashboard to manage your business account, create your own digital card to showcase your services, and keep your business information up-to-date. You have full control over your card and can update it at any time. You can also browse other businesses and add them to your favorites.";
 
-	useEffect(() => {
-		console.log(colorMode);
-	}, [colorMode]);
+	useEffect(() => {}, [colorMode]);
 	return (
 		<Grid
 			container
@@ -55,13 +53,15 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
 							direction="row"
 							spacing={4}
 						>
-							<Button
-								color="info"
-								variant="contained"
-								sx={{ p: 1.75, display: () => (user?.biz ? "block" : "none") }}
-							>
-								Create Your Business Card
-							</Button>
+							<NavbarLink to={ROUTES.ADD_CARD}>
+								<Button
+									color="info"
+									variant="contained"
+									sx={{ p: 1.75, display: () => (user?.biz ? "block" : "none") }}
+								>
+									Create Your Business Card
+								</Button>
+							</NavbarLink>
 							<NavbarLink to={ROUTES.CARDS}>
 								<Button
 									color="inherit"

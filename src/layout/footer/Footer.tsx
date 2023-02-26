@@ -22,13 +22,14 @@ const Footer: FunctionComponent<FooterProps> = () => {
 					position: "sticky",
 					height: "4rem",
 					backgroundColor: "transparent",
+
 					display: () => {
 						return isLoggedIn ? { md: "flex" } : "none";
 					},
 				}}
 			>
 				<BottomNavigationAction
-					sx={{ color: theme.palette.text.primary }}
+					sx={{ color: theme.palette.primary.contrastText }}
 					label="About"
 					value="About"
 					icon={<InfoIcon />}

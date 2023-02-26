@@ -3,8 +3,8 @@ import JSConfetti from "js-confetti";
 import { useNavigate } from "react-router-dom";
 
 interface SuccessProps {
-	firstName: string;
-	lastName: string;
+	firstName: string | undefined;
+	lastName: string | undefined;
 }
 
 const Success: FunctionComponent<SuccessProps> = ({ firstName, lastName }) => {

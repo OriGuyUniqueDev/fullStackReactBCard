@@ -9,6 +9,7 @@ export default interface CardType {
 	imgAlt: string;
 	bizName: string;
 	bizField: string;
-	uniqueNum: number;
-	likes: string[];
+	likes?: string[];
+	_id?: string;
+	userId?: string;
 }

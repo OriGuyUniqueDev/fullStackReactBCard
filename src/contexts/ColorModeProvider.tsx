@@ -21,9 +21,7 @@ export const ColorModeProvider: FC<ColorModeProps> = ({ children }) => {
 	function toggleColorMode() {
 		setColorMode((prev) => (prev === "dark" ? "light" : "dark"));
 	}
-	useEffect(() => {
-		colorMode === "dark" ? setBgColor("radial-gradient(circle, rgba(63,81,181,1) 26%, rgba(26,32,44,1) 100%)") : setBgColor("linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)");
-	}, [colorMode]);
+
 	return <ColorModeContext.Provider value={{ colorMode, toggleColorMode, bgcolor, setBgColor }}>{children}</ColorModeContext.Provider>;
 };
 

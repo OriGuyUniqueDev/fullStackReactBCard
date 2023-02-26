@@ -9,6 +9,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Success from "./success/Success";
 import { useLoggedIn } from "../../../contexts/LoggedInProvider";
 import { redirect, useNavigate } from "react-router-dom";
+import { useToast } from "../../../contexts/ToastProvider";
 
 interface RegisterProps {
 	setLoginPage: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,6 +20,10 @@ const Register: FunctionComponent<RegisterProps> = ({ setLoginPage }) => {
 	const [isLoading, setLoading] = useState<boolean>(false);
 	const { isLoggedIn, setLoggedIn } = useLoggedIn();
 	const navigate = useNavigate();
+	const { setMessage, setSnackOpen, setType } = useToast();
+	const handleBack = () => {
+		setLoginPage(true);
+	};
 
 	const URLTOMATCH = new RegExp(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/);
 
@@ -36,9 +41,6 @@ const Register: FunctionComponent<RegisterProps> = ({ setLoginPage }) => {
 		}),
 	];
 
-	const handleBack = () => {
-		setLoginPage(true);
-	};
 	const formik = useFormik({
 		initialValues: {
 			email: "",
@@ -56,6 +58,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setLoginPage }) => {
 			zip: "",
 			biz: false,
 			phone: "",
+			favBiz: [],
 		},
 		validationSchema: validationSchemaArr[activeStep],
 		onSubmit: async (values) => {
@@ -70,8 +73,15 @@ const Register: FunctionComponent<RegisterProps> = ({ setLoginPage }) => {
 							sessionStorage.setItem("ent", res.data.token);
 							setLoggedIn(true);
 							setActiveStep((prevStep) => prevStep + 1);
+							setSnackOpen((prev) => !prev);
+							setType("success");
+							setMessage("Welcome to Control, You'r Register We'll Direct you");
 						})
-						.catch((err) => err.response.data);
+						.catch((err) => {
+							setSnackOpen((prev) => !prev);
+							setType("error");
+							setMessage(err.response.data);
+						});
 				}
 			} else {
 				setActiveStep((prevStep) => prevStep + 1);

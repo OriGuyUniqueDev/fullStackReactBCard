@@ -15,4 +15,6 @@ export default interface UserType {
 	biz: boolean;
 	bizName?: string;
 	bizField?: string;
+	_id?: string;
+	favBiz: string[];
 }

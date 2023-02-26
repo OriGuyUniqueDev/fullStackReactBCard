@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Divider, Fade, Grid, Typography, useTheme } from "@mui/material";
+import { Box, CircularProgress, Divider, Fade, Grid, InputAdornment, TextField, Typography, useTheme } from "@mui/material";
 import { Container } from "@mui/system";
 import { FunctionComponent, useEffect, useState } from "react";
 import BizCard from "../../components/bizCard/BizCard";
@@ -7,12 +7,16 @@ import CardType from "../../interfaces/CardType";
 import UserType from "../../interfaces/User";
 import { getAllCards } from "../../services/userCRUD";
 import { TransitionGroup } from "react-transition-group";
+import SearchIcon from "@mui/icons-material/Search";
 
 interface CardsProps {}
 
 const Cards: FunctionComponent<CardsProps> = () => {
 	const { isLoaded, setIsLoaded } = useIsLoaded(true);
-	const [cards, setCards] = useState<CardType[] | null>(null);
+	const [cards, setCards] = useState<CardType[] | undefined>(undefined);
+	const [filterArr, setFilterArr] = useState<CardType[] | undefined>(undefined);
+	const [render, setRender] = useState<boolean>(false);
+
 	const theme = useTheme();
 
 	useEffect(() => {
@@ -22,7 +26,7 @@ const Cards: FunctionComponent<CardsProps> = () => {
 			})
 			.finally(() => setIsLoaded(false))
 			.catch((err) => console.log(err));
-	}, [isLoaded]);
+	}, [isLoaded, render]);
 	return (
 		<Container>
 			<Typography
@@ -38,6 +42,26 @@ const Cards: FunctionComponent<CardsProps> = () => {
 				Discover new and exciting businesses to try
 			</Typography>
 			<Divider />
+			<TextField
+				id="input-with-icon-textfield"
+				label="Search field"
+				type="search"
+				color="info"
+				onChange={(e) => {
+					setFilterArr(() => {
+						return cards?.filter((item) => item.bizName.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()) === true);
+					});
+				}}
+				sx={{ color: "white" }}
+				InputProps={{
+					endAdornment: (
+						<InputAdornment position="end">
+							<SearchIcon />
+						</InputAdornment>
+					),
+				}}
+				variant="standard"
+			/>
 			<Box sx={{ display: "flex", flexDirection: "column" }}>
 				<CircularProgress
 					sx={{ mx: "auto", mt: 5, display: () => (isLoaded ? "block" : "none") }}
@@ -51,21 +75,24 @@ const Cards: FunctionComponent<CardsProps> = () => {
 					{!cards?.length ? (
 						<Typography>No Cards To Show</Typography>
 					) : (
-						cards?.map((card, index) => {
+						filterArr?.map((card, index) => {
 							return (
 								<Fade
 									in={true}
 									easing={{ enter: theme.transitions.easing.easeInOut }}
 									timeout={{ enter: 500 }}
+									key={index}
 								>
 									<Grid
-										key={index}
 										item
 										md={4}
 										sm={6}
 										xs={12}
 									>
-										<BizCard data={card} />
+										<BizCard
+											isRender={setRender}
+											data={card}
+										/>
 									</Grid>
 								</Fade>
 							);

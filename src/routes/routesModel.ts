@@ -8,6 +8,7 @@ const ROUTES = {
 	PROFILE: "/user-info",
 	EDIT_USER: "/edit-user",
 	FAV_CARDS: "/fav-cards",
+	ADD_CARD: "/addCard",
 };
 
 export default ROUTES;

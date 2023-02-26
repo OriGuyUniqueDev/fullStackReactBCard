@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ColorModeProvider, useColorMode } from "./contexts/ColorModeProvider";
 import LoggedInProvider, { useLoggedIn } from "./contexts/LoggedInProvider";
+import { ToastProvider } from "./contexts/ToastProvider";
 import Layout from "./layout/Layout";
 import Router from "./routes/Router";
 
@@ -10,6 +11,7 @@ function App() {
 	const themeUse = useTheme();
 	themeUse.palette.mode = "dark";
 	const { colorMode, bgcolor } = useColorMode();
+
 	const darkTheme = createTheme({
 		palette: {
 			mode: "dark",
@@ -75,31 +77,34 @@ function App() {
 			},
 			background: {
 				default: "#f5f5e8",
-				paper: "#f5f5e8",
+				paper: "#fff",
 			},
 			text: {
 				primary: "#333333",
-				secondary: "#FFFFFF",
+				// secondary: "#FFFFFF",
 			},
 		},
 	});
+
 	return (
 		<div
 			className="App"
-			style={{ background: bgcolor }}
+			// style={{ background: bgcolor }}
 		>
-			<ThemeProvider theme={colorMode === "dark" ? darkTheme : lightTheme}>
-				<BrowserRouter>
-					<LoggedInProvider>
-						<>
-							<CssBaseline />
-							<Layout>
-								<Router />
-							</Layout>
-						</>
-					</LoggedInProvider>
-				</BrowserRouter>
-			</ThemeProvider>
+			<ToastProvider>
+				<ThemeProvider theme={colorMode === "dark" ? darkTheme : lightTheme}>
+					<BrowserRouter>
+						<LoggedInProvider>
+							<>
+								<CssBaseline />
+								<Layout>
+									<Router />
+								</Layout>
+							</>
+						</LoggedInProvider>
+					</BrowserRouter>
+				</ThemeProvider>
+			</ToastProvider>
 		</div>
 	);
 }
