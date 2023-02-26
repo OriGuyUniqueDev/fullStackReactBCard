@@ -34,6 +34,23 @@ const AboutPage: FunctionComponent<AboutPageProps> = () => {
 				>
 					<Grid
 						item
+						display={{ md: "block" }}
+						md={4}
+						alignSelf="center"
+					>
+						<img
+							style={{ borderRadius: 20 }}
+							src="/profilePic.jpg"
+						/>
+					</Grid>
+				</Fade>
+				<Fade
+					in={true}
+					easing={{ enter: theme.transitions.easing.easeInOut }}
+					timeout={{ enter: 1000 }}
+				>
+					<Grid
+						item
 						xs={12}
 						md={7}
 					>
@@ -61,23 +78,6 @@ const AboutPage: FunctionComponent<AboutPageProps> = () => {
 						>
 							I'm eager to start my career as a professional developer and make a positive impact in the industry. If you're looking for a young, happy, and professional full stack developer with a passion for learning, I'm your guy!
 						</Typography>
-					</Grid>
-				</Fade>
-				<Fade
-					in={true}
-					easing={{ enter: theme.transitions.easing.easeInOut }}
-					timeout={{ enter: 1000 }}
-				>
-					<Grid
-						item
-						display={{ xs: "none", md: "block" }}
-						md={4}
-						alignSelf="center"
-					>
-						<img
-							style={{ borderRadius: 20 }}
-							src="/profilePic.jpg"
-						/>
 					</Grid>
 				</Fade>
 			</Grid>

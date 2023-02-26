@@ -33,14 +33,12 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
 			>
 				<Grid
 					item
-					xs={5}
+					xs={12}
+					md={5}
 					textAlign="center"
 				>
-					<Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-						<Typography
-							variant="h2"
-							sx={{ textTransform: "capitalize" }}
-						>
+					<Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mx: { xs: 2, md: 0 } }}>
+						<Typography sx={{ textTransform: "capitalize", fontSize: { xs: 48, md: 64 } }}>
 							Welcome {user?.firstName} {user?.lastName} to Control !
 						</Typography>
 						<Typography
@@ -50,7 +48,7 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
 							{user?.biz ? bizHeroText : userHeroText}
 						</Typography>
 						<Stack
-							direction="row"
+							sx={{ flexDirection: { xs: "column", md: "row" } }}
 							spacing={4}
 						>
 							<NavbarLink to={ROUTES.ADD_CARD}>

@@ -23,6 +23,7 @@ const Cards: FunctionComponent<CardsProps> = () => {
 		getAllCards()
 			?.then((res) => {
 				setCards(res?.data);
+				setFilterArr(res?.data);
 			})
 			.finally(() => setIsLoaded(false))
 			.catch((err) => console.log(err));
@@ -31,12 +32,12 @@ const Cards: FunctionComponent<CardsProps> = () => {
 		<Container>
 			<Typography
 				variant="h3"
-				sx={{ mt: 6, mb: 2 }}
+				sx={{ mt: 6, mb: 2, fontSize: { xs: 36, md: 48 } }}
 			>
 				Find the Perfect Business for Your Needs
 			</Typography>
 			<Typography
-				sx={{ mb: 2 }}
+				sx={{ mb: 2, fontSize: { xs: 18, md: 24 } }}
 				variant="h5"
 			>
 				Discover new and exciting businesses to try
@@ -52,7 +53,7 @@ const Cards: FunctionComponent<CardsProps> = () => {
 						return cards?.filter((item) => item.bizName.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()) === true);
 					});
 				}}
-				sx={{ color: "white" }}
+				sx={{ color: "white", mt: 2 }}
 				InputProps={{
 					endAdornment: (
 						<InputAdornment position="end">

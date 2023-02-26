@@ -14,7 +14,7 @@ interface BizCardProps {
 
 const BizCard: FunctionComponent<BizCardProps> = ({ data, isRender }) => {
 	return (
-		<Card sx={{ Width: 350, mx: "auto", display: "flex", flexDirection: "column", alignItems: "center" }}>
+		<Card sx={{ maxWidth: 300, mx: "auto", display: "flex", flexDirection: "column", alignItems: "center" }}>
 			<CardActionArea>
 				<CardTop image={{ url: data.imgUrl, alt: data.imgAlt }} />
 				<CardBody data={data} />

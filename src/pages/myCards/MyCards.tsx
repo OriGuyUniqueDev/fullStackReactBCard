@@ -74,12 +74,12 @@ const MyCards: FunctionComponent<MyCardsProps> = () => {
 			<Container sx={{ position: "relative" }}>
 				<Typography
 					variant="h3"
-					sx={{ mt: 6, mb: 2 }}
+					sx={{ mt: 6, mb: 2, fontSize: { xs: 36, md: 48 } }}
 				>
 					Business Card Management Made Easy
 				</Typography>
 				<Typography
-					sx={{ mb: 2 }}
+					sx={{ mb: 2, fontSize: { xs: 18, md: 24 } }}
 					variant="h5"
 				>
 					Manage your business cards here. Add, edit, or delete cards as needed.
@@ -142,7 +142,7 @@ const MyCards: FunctionComponent<MyCardsProps> = () => {
 			<Box sx={{ height: 320, position: "absolute", bottom: 0, right: 0, flexGrow: 1 }}>
 				<SpeedDial
 					ariaLabel="SpeedDial basic example"
-					sx={{ position: "relative", zIndex: 150, bottom: 60, right: 60 }}
+					sx={{ position: "relative", zIndex: 150, bottom: 0, right: 60 }}
 					icon={<SpeedDialIcon />}
 				>
 					{actions.map((action) => (
