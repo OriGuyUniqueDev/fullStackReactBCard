@@ -40,6 +40,7 @@ const FavCards: FunctionComponent<FavCardsProps> = () => {
 					setIsLoaded(false);
 				})
 				.catch((err) => {
+					setIsLoaded(false);
 					console.log(err);
 				});
 			user.favBiz;
