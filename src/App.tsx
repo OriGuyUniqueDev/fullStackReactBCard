@@ -93,7 +93,7 @@ function App() {
 		>
 			<ToastProvider>
 				<ThemeProvider theme={colorMode === "dark" ? darkTheme : lightTheme}>
-					<BrowserRouter basename="/">
+					<BrowserRouter>
 						<LoggedInProvider>
 							<>
 								<CssBaseline />
