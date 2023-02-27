@@ -113,17 +113,17 @@ const CardBottom: FunctionComponent<CardBottomProps> = ({ likes, data, isRender 
 					sx={{ display: () => (pathname === "/ourCommunity" || pathname === "/fav-cards" ? "none" : "block") }}
 					onClick={handleDelete}
 				>
-					<DeleteForeverIcon sx={{ color: theme.palette.primary.contrastText }} />
+					<DeleteForeverIcon sx={{ color: theme.palette.primary.main }} />
 				</Button>
 				<Button
 					onClick={() => setOpenModal(true)}
 					sx={{ display: () => (pathname === "/ourCommunity" || pathname === "/fav-cards" ? "none" : "block") }}
 				>
-					<CreateIcon sx={{ color: theme.palette.primary.contrastText }} />
+					<CreateIcon sx={{ color: theme.palette.primary.main }} />
 				</Button>
 				<Button>
 					<Link to={`tel:${user?.phone}`}>
-						<CallIcon sx={{ color: theme.palette.primary.contrastText }} />
+						<CallIcon sx={{ color: theme.palette.primary.main }} />
 					</Link>
 				</Button>
 				<Button
