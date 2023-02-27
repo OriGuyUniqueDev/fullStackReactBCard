@@ -24,6 +24,9 @@ const Register: FunctionComponent<RegisterProps> = ({ setLoginPage }) => {
 	const handleBack = () => {
 		setLoginPage(true);
 	};
+	const handleBackStep = () => {
+		setActiveStep((prev) => prev - 1);
+	};
 
 	const URLTOMATCH = new RegExp(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/);
 
@@ -58,7 +61,6 @@ const Register: FunctionComponent<RegisterProps> = ({ setLoginPage }) => {
 			zip: "",
 			biz: false,
 			phone: "",
-			favBiz: [],
 		},
 		validationSchema: validationSchemaArr[activeStep],
 		onSubmit: async (values) => {
@@ -175,7 +177,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setLoginPage }) => {
 							id="submitButton"
 							sx={{ mt: 3, mb: 2, paddingBlock: 2 }}
 							disabled={activeStep === 0}
-							onClick={handleBack}
+							onClick={handleBackStep}
 						>
 							Back
 						</Button>

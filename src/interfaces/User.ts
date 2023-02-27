@@ -16,5 +16,5 @@ export default interface UserType {
 	bizName?: string;
 	bizField?: string;
 	_id?: string;
-	favBiz: string[];
+	favBiz?: string[];
 }
