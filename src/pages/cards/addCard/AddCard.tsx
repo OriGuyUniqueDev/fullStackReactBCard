@@ -51,7 +51,7 @@ const AddCard: FunctionComponent<AddCardProps> = () => {
 					setSnackOpen((prev) => !prev);
 					setType("success");
 					setMessage("You'r card has been added ");
-					redirect("/myCards");
+					navigate("/myCards");
 				})
 				.finally(() => setLoading(false))
 				.catch((err) => {

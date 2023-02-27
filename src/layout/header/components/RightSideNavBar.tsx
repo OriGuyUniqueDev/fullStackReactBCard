@@ -18,7 +18,7 @@ const RightSideNavBar: FunctionComponent<RightSideNavBarProps> = () => {
 	function handleLogoutClick() {
 		sessionStorage.removeItem("ent");
 		setLoggedIn(false);
-		redirect("/");
+		navigate("/");
 	}
 	return (
 		<Box sx={{ display: "flex", alignItems: "flex-end", gap: 2 }}>

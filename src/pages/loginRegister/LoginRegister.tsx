@@ -25,7 +25,7 @@ const LoginRegister: FunctionComponent<LoginRegisterProps> = () => {
 		setBackgroundLoaded(true);
 	};
 	useEffect(() => {
-		isLoggedIn && redirect("/welcome");
+		isLoggedIn && navigate("/welcome");
 		setBgColor(theme.palette.background.default);
 	}, []);
 	return (

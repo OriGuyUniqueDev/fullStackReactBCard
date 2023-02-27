@@ -15,7 +15,7 @@ const Success: FunctionComponent<SuccessProps> = ({ firstName, lastName }) => {
 		jsConfetti.addConfetti();
 		setTimeout(() => {
 			jsConfetti.clearCanvas();
-			redirect("/welcome");
+			navigate("/welcome");
 		}, 2500);
 	}, []);
 	return (

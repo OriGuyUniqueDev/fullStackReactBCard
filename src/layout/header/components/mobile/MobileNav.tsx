@@ -23,7 +23,7 @@ const MobileNav: FunctionComponent<MobileNavProps> = () => {
 	function handleLogoutClick() {
 		sessionStorage.removeItem("ent");
 		setLoggedIn(false);
-		redirect("/");
+		navigate("/");
 	}
 
 	return (
