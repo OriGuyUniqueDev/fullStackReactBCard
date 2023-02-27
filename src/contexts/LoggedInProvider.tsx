@@ -45,13 +45,13 @@ export const LoggedInProvider: FC<LoggedInProps> = ({ children }) => {
 
 					setLoggedIn(true);
 				})
-				.finally(() => navigate("/welcome"))
+				.finally(() => redirect("/welcome"))
 				.catch((err) => {
 					setLoggedIn(false);
-					navigate("/");
+					redirect("/");
 				});
 		setLoggedIn(false);
-		navigate("/");
+		redirect("/");
 	}, [token]);
 	useEffect(() => {
 		if (token)

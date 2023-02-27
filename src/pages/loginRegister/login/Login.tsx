@@ -2,7 +2,7 @@ import { Button, CircularProgress, Grid, TextField, Typography } from "@mui/mate
 import { Box } from "@mui/system";
 import { useFormik } from "formik";
 import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import ToastMessage from "../../../components/ToastMessage";
 import { useLoggedIn } from "../../../contexts/LoggedInProvider";
@@ -37,7 +37,7 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 					setLoading(false);
 					setLoggedIn(true);
 					sessionStorage.setItem("ent", res.data.token);
-					navigate("/welcome");
+					redirect("/welcome");
 					setSnackOpen((prev) => !prev);
 					setType("success");
 					setMessage("Great You'r Logged In, We'll Direct You ⭐");
