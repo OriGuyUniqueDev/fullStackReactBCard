@@ -7,7 +7,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import { useLoggedIn } from "../../../../contexts/LoggedInProvider";
 import { useColorMode } from "../../../../contexts/ColorModeProvider";
-import { redirect, useNavigate } from "react-router-dom";
+import { Navigate, redirect, useNavigate } from "react-router-dom";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 
@@ -23,7 +23,12 @@ const MobileNav: FunctionComponent<MobileNavProps> = () => {
 	function handleLogoutClick() {
 		sessionStorage.removeItem("ent");
 		setLoggedIn(false);
-		navigate("/");
+		return (
+			<Navigate
+				replace
+				to={ROUTES.ROOT}
+			/>
+		);
 	}
 
 	return (

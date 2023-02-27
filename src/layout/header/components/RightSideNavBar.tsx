@@ -7,7 +7,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useColorMode } from "../../../contexts/ColorModeProvider";
 import { useLoggedIn } from "../../../contexts/LoggedInProvider";
-import { redirect, useNavigate } from "react-router-dom";
+import { Navigate, redirect, useNavigate } from "react-router-dom";
 
 interface RightSideNavBarProps {}
 
@@ -18,7 +18,10 @@ const RightSideNavBar: FunctionComponent<RightSideNavBarProps> = () => {
 	function handleLogoutClick() {
 		sessionStorage.removeItem("ent");
 		setLoggedIn(false);
-		navigate("/");
+		<Navigate
+			replace
+			to={ROUTES.ROOT}
+		/>;
 	}
 	return (
 		<Box sx={{ display: "flex", alignItems: "flex-end", gap: 2 }}>

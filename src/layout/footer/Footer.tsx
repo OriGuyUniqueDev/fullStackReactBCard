@@ -4,7 +4,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import { FunctionComponent } from "react";
 import ROUTES from "../../routes/routesModel";
-import { redirect, useNavigate } from "react-router-dom";
+import { Navigate, redirect, useNavigate } from "react-router-dom";
 import { useLoggedIn } from "../../contexts/LoggedInProvider";
 
 interface FooterProps {}
@@ -34,7 +34,12 @@ const Footer: FunctionComponent<FooterProps> = () => {
 					value="About"
 					icon={<InfoIcon />}
 					onClick={() => {
-						navigate(ROUTES.ABOUT);
+						return (
+							<Navigate
+								replace
+								to={ROUTES.ABOUT}
+							/>
+						);
 					}}
 				></BottomNavigationAction>
 				<BottomNavigationAction
@@ -43,7 +48,12 @@ const Footer: FunctionComponent<FooterProps> = () => {
 					value="Favorites"
 					icon={<FavoriteIcon />}
 					onClick={() => {
-						navigate(ROUTES.FAV_CARDS);
+						return (
+							<Navigate
+								replace
+								to={ROUTES.FAV_CARDS}
+							/>
+						);
 					}}
 				></BottomNavigationAction>
 				<BottomNavigationAction
@@ -52,7 +62,12 @@ const Footer: FunctionComponent<FooterProps> = () => {
 					value="My Cards"
 					icon={<LibraryBooksIcon />}
 					onClick={() => {
-						navigate(ROUTES.CARDS);
+						return (
+							<Navigate
+								replace
+								to={ROUTES.CARDS}
+							/>
+						);
 					}}
 				></BottomNavigationAction>
 			</BottomNavigation>

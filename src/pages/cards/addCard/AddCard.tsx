@@ -8,7 +8,8 @@ import FormInputField from "../../../components/FormInputField";
 import CardType from "../../../interfaces/CardType";
 import { addBizCard } from "../../../services/userCRUD";
 import { useToast } from "../../../contexts/ToastProvider";
-import { redirect, useNavigate } from "react-router-dom";
+import { Navigate, redirect, useNavigate } from "react-router-dom";
+import ROUTES from "../../../routes/routesModel";
 
 interface AddCardProps {}
 
@@ -51,7 +52,10 @@ const AddCard: FunctionComponent<AddCardProps> = () => {
 					setSnackOpen((prev) => !prev);
 					setType("success");
 					setMessage("You'r card has been added ");
-					navigate("/myCards");
+					<Navigate
+						replace
+						to={ROUTES.MY_CARDS}
+					/>;
 				})
 				.finally(() => setLoading(false))
 				.catch((err) => {

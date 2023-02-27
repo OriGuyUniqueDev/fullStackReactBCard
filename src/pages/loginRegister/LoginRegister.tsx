@@ -3,8 +3,9 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { useLoggedIn } from "../../contexts/LoggedInProvider";
 import Login from "./login/Login";
 import Register from "./register/Register";
-import { redirect, useNavigate } from "react-router-dom";
+import { Navigate, redirect, useNavigate } from "react-router-dom";
 import { useColorMode } from "../../contexts/ColorModeProvider";
+import ROUTES from "../../routes/routesModel";
 
 interface LoginRegisterProps {}
 
@@ -25,8 +26,13 @@ const LoginRegister: FunctionComponent<LoginRegisterProps> = () => {
 		setBackgroundLoaded(true);
 	};
 	useEffect(() => {
-		isLoggedIn && navigate("/welcome");
 		setBgColor(theme.palette.background.default);
+		isLoggedIn && (
+			<Navigate
+				replace
+				to={ROUTES.WELCOME}
+			/>
+		);
 	}, []);
 	return (
 		<Grid

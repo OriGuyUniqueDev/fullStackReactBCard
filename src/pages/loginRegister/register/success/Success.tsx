@@ -1,6 +1,7 @@
 import { FunctionComponent, useEffect } from "react";
 import JSConfetti from "js-confetti";
-import { redirect, useNavigate } from "react-router-dom";
+import { Navigate, redirect, useNavigate } from "react-router-dom";
+import ROUTES from "../../../../routes/routesModel";
 
 interface SuccessProps {
 	firstName: string | undefined;
@@ -15,7 +16,10 @@ const Success: FunctionComponent<SuccessProps> = ({ firstName, lastName }) => {
 		jsConfetti.addConfetti();
 		setTimeout(() => {
 			jsConfetti.clearCanvas();
-			navigate("/welcome");
+			<Navigate
+				replace
+				to={ROUTES.WELCOME}
+			/>;
 		}, 2500);
 	}, []);
 	return (

@@ -2,11 +2,12 @@ import { Button, CircularProgress, Grid, TextField, Typography } from "@mui/mate
 import { Box } from "@mui/system";
 import { useFormik } from "formik";
 import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import ToastMessage from "../../../components/ToastMessage";
 import { useLoggedIn } from "../../../contexts/LoggedInProvider";
 import { useToast } from "../../../contexts/ToastProvider";
+import ROUTES from "../../../routes/routesModel";
 import { loginUser } from "../../../services/userCRUD";
 
 interface LoginProps {
@@ -37,10 +38,15 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 					setLoading(false);
 					setLoggedIn(true);
 					sessionStorage.setItem("ent", res.data.token);
-					navigate("/welcome");
 					setSnackOpen((prev) => !prev);
 					setType("success");
 					setMessage("Great You'r Logged In, We'll Direct You ⭐");
+					return (
+						<Navigate
+							replace
+							to={ROUTES.WELCOME}
+						/>
+					);
 				})
 
 				.catch((err) => {
