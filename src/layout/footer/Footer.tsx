@@ -34,12 +34,7 @@ const Footer: FunctionComponent<FooterProps> = () => {
 					value="About"
 					icon={<InfoIcon />}
 					onClick={() => {
-						return (
-							<Navigate
-								replace
-								to={ROUTES.ABOUT}
-							/>
-						);
+						navigate(ROUTES.ABOUT);
 					}}
 				></BottomNavigationAction>
 				<BottomNavigationAction
@@ -48,12 +43,7 @@ const Footer: FunctionComponent<FooterProps> = () => {
 					value="Favorites"
 					icon={<FavoriteIcon />}
 					onClick={() => {
-						return (
-							<Navigate
-								replace
-								to={ROUTES.FAV_CARDS}
-							/>
-						);
+						navigate(ROUTES.FAV_CARDS);
 					}}
 				></BottomNavigationAction>
 				<BottomNavigationAction
@@ -62,12 +52,7 @@ const Footer: FunctionComponent<FooterProps> = () => {
 					value="My Cards"
 					icon={<LibraryBooksIcon />}
 					onClick={() => {
-						return (
-							<Navigate
-								replace
-								to={ROUTES.CARDS}
-							/>
-						);
+						navigate(ROUTES.CARDS);
 					}}
 				></BottomNavigationAction>
 			</BottomNavigation>

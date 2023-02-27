@@ -9,13 +9,14 @@ const AboutPage: FunctionComponent<AboutPageProps> = () => {
 		<Container
 			maxWidth="xl"
 			style={{ marginTop: 40 }}
+			sx={{ mb: 10 }}
 		>
 			<Fade
 				in={true}
 				timeout={850}
 				easing={{ enter: theme.transitions.easing.easeInOut }}
 			>
-				<Typography sx={{ typography: { xs: "h2", lg: "h1" } }}>About Me</Typography>
+				<Typography sx={{ typography: { xs: "h2", lg: "h1" } }}>About Me 👋</Typography>
 			</Fade>
 			<Divider />
 			<Grid
@@ -35,11 +36,12 @@ const AboutPage: FunctionComponent<AboutPageProps> = () => {
 					<Grid
 						item
 						display={{ lg: "block" }}
-						md={4}
+						lg={4}
+						xs={12}
 						alignSelf="center"
 					>
 						<img
-							style={{ borderRadius: 20 }}
+							style={{ borderRadius: 20, width: "100%", marginBottom: 25 }}
 							src="/profilePic.jpg"
 						/>
 					</Grid>

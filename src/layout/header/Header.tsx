@@ -33,7 +33,7 @@ const Header: FunctionComponent<HeaderProps> = ({}) => {
 				</Toolbar>
 			</AppBar>
 			<AppBar
-				color="default"
+				color="transparent"
 				sx={{
 					height: "5rem",
 					display: () => {

@@ -40,7 +40,7 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 					sessionStorage.setItem("ent", res.data.token);
 					setSnackOpen((prev) => !prev);
 					setType("success");
-					setMessage("Great You'r Logged In, We'll Direct You ⭐");
+					setMessage("Great You'r Logged In ⭐");
 					navigate(ROUTES.WELCOME);
 				})
 
@@ -78,6 +78,7 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 				<Typography
 					component="h1"
 					variant="h4"
+					textAlign={"center"}
 				>
 					Welcome, Please Login
 				</Typography>
@@ -115,7 +116,7 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 					<Link
 						to={""}
 						onClick={handleClickLogin}
-						style={{ color: "white", textDecoration: "none", width: "100%", textAlign: "right", marginTop: 8 }}
+						style={{ color: "white", textDecoration: "none", width: "100%", textAlign: "left", marginTop: 8 }}
 					>
 						Not Our Friend Yet? Lets sign you up !
 					</Link>

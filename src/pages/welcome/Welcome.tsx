@@ -34,16 +34,16 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
 				<Grid
 					item
 					xs={12}
-					md={5}
+					md={8}
 					textAlign="center"
 				>
 					<Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mx: { xs: 2, lg: 0 } }}>
-						<Typography sx={{ textTransform: "capitalize", fontSize: { xs: 48, lg: 64 } }}>
+						<Typography sx={{ textTransform: "capitalize", fontSize: { xs: 32, lg: 64 } }}>
 							Welcome {user?.firstName} {user?.lastName} to Control !
 						</Typography>
 						<Typography
 							variant="subtitle2"
-							sx={{ py: 5, fontSize: 18, width: "80%", mx: "auto" }}
+							sx={{ py: 5, fontSize: { xs: 14, lg: 18 }, width: "80%", mx: "auto" }}
 						>
 							{user?.biz ? bizHeroText : userHeroText}
 						</Typography>

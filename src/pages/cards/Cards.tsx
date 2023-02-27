@@ -73,7 +73,7 @@ const Cards: FunctionComponent<CardsProps> = () => {
 					marginTop={2}
 					container
 				>
-					{!cards?.length ? (
+					{!cards?.length && !isLoaded ? (
 						<Typography>No Cards To Show</Typography>
 					) : (
 						filterArr?.map((card, index) => {

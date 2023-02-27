@@ -70,7 +70,7 @@ const FavCards: FunctionComponent<FavCardsProps> = () => {
 					marginTop={2}
 					container
 				>
-					{!cards?.length ? (
+					{!cards?.length && !isLoaded ? (
 						<Zoom
 							in={true}
 							style={{ transitionDelay: "250ms" }}
@@ -80,7 +80,6 @@ const FavCards: FunctionComponent<FavCardsProps> = () => {
 							<Typography
 								mx="auto"
 								mt={5}
-								variant="h4"
 							>
 								No Cards To Show
 							</Typography>

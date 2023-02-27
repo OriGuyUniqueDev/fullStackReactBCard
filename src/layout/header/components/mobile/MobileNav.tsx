@@ -22,6 +22,7 @@ const MobileNav: FunctionComponent<MobileNavProps> = () => {
 	const { user } = useLoggedIn();
 	function handleLogoutClick() {
 		sessionStorage.removeItem("ent");
+		setOpen(false);
 		setLoggedIn(false);
 		return (
 			<Navigate
@@ -53,25 +54,35 @@ const MobileNav: FunctionComponent<MobileNavProps> = () => {
 			>
 				<Box sx={{ display: "flex", justifyContent: "space-between", flexDirection: "column", height: "100%", my: 4, mx: 14, fontSize: 20, gap: 2, ml: 6 }}>
 					<Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-						<NavbarLink to={ROUTES.WELCOME}>
-							<span>Home</span>
-						</NavbarLink>
+						<span onClick={() => setOpen(false)}>
+							<NavbarLink to={ROUTES.WELCOME}>
+								<span>Home</span>
+							</NavbarLink>
+						</span>
 
-						<NavbarLink to={ROUTES.ABOUT}>
-							<span>About</span>
-						</NavbarLink>
-						<NavbarLink to={ROUTES.FAV_CARDS}>
-							<span>Favorites</span>
-						</NavbarLink>
-						<NavbarLink to={ROUTES.CARDS}>
-							<span>Our Community</span>
-						</NavbarLink>
-						<NavbarLink
-							showLink={user?.biz ? true : false}
-							to={ROUTES.MY_CARDS}
-						>
-							<span>My Cards</span>
-						</NavbarLink>
+						<span onClick={() => setOpen(false)}>
+							<NavbarLink to={ROUTES.ABOUT}>
+								<span>About</span>
+							</NavbarLink>
+						</span>
+						<span onClick={() => setOpen(false)}>
+							<NavbarLink to={ROUTES.FAV_CARDS}>
+								<span>Favorites</span>
+							</NavbarLink>
+						</span>
+						<span onClick={() => setOpen(false)}>
+							<NavbarLink to={ROUTES.CARDS}>
+								<span>Our Community</span>
+							</NavbarLink>
+						</span>
+						<span onClick={() => setOpen(false)}>
+							<NavbarLink
+								showLink={user?.biz ? true : false}
+								to={ROUTES.MY_CARDS}
+							>
+								<span>My Cards</span>
+							</NavbarLink>
+						</span>
 					</Box>
 					<Stack
 						direction="row"
