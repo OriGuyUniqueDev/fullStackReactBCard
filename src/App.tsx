@@ -93,7 +93,7 @@ function App() {
 		>
 			<ToastProvider>
 				<ThemeProvider theme={colorMode === "dark" ? darkTheme : lightTheme}>
-					<HashRouter basename="/">
+					<BrowserRouter basename="/">
 						<LoggedInProvider>
 							<>
 								<CssBaseline />
@@ -102,7 +102,7 @@ function App() {
 								</Layout>
 							</>
 						</LoggedInProvider>
-					</HashRouter>
+					</BrowserRouter>
 					{/* <BrowserRouter>
 						
 					</BrowserRouter> */}
