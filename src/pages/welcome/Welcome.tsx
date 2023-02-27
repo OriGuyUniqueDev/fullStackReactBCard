@@ -37,8 +37,8 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
 					md={5}
 					textAlign="center"
 				>
-					<Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mx: { xs: 2, md: 0 } }}>
-						<Typography sx={{ textTransform: "capitalize", fontSize: { xs: 48, md: 64 } }}>
+					<Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mx: { xs: 2, lg: 0 } }}>
+						<Typography sx={{ textTransform: "capitalize", fontSize: { xs: 48, lg: 64 } }}>
 							Welcome {user?.firstName} {user?.lastName} to Control !
 						</Typography>
 						<Typography
@@ -48,14 +48,15 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
 							{user?.biz ? bizHeroText : userHeroText}
 						</Typography>
 						<Stack
-							sx={{ flexDirection: { xs: "column", md: "row" } }}
-							spacing={4}
+							sx={{ flexDirection: { xs: "column", lg: "row" } }}
+
+							// spacing={4}
 						>
 							<NavbarLink to={ROUTES.ADD_CARD}>
 								<Button
 									color="info"
 									variant="contained"
-									sx={{ p: 1.75, display: () => (user?.biz ? "block" : "none") }}
+									sx={{ p: 1.75, display: () => (user?.biz ? "block" : "none"), mx: "auto", mb: 3 }}
 								>
 									Create Your Business Card
 								</Button>
@@ -64,7 +65,7 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
 								<Button
 									color="inherit"
 									variant="outlined"
-									sx={{ p: 1.75 }}
+									sx={{ p: 1.75, ml: { lg: 3 } }}
 								>
 									Browse Businesses
 								</Button>

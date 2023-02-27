@@ -49,12 +49,12 @@ const FavCards: FunctionComponent<FavCardsProps> = () => {
 		<Container>
 			<Typography
 				variant="h3"
-				sx={{ mt: 6, mb: 2, fontSize: { xs: 36, md: 48 } }}
+				sx={{ mt: 6, mb: 2, fontSize: { xs: 36, lg: 48 } }}
 			>
 				Liked Business
 			</Typography>
 			<Typography
-				sx={{ mb: 2, fontSize: { xs: 18, md: 24 } }}
+				sx={{ mb: 2, fontSize: { xs: 18, lg: 24 } }}
 				variant="h5"
 			>
 				Business you find interesting

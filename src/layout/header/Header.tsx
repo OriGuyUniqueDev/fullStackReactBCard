@@ -18,7 +18,7 @@ const Header: FunctionComponent<HeaderProps> = ({}) => {
 				sx={{
 					height: "5rem",
 					display: () => {
-						return isLoggedIn ? { md: "flex", xs: "none" } : "none";
+						return isLoggedIn ? { lg: "flex", xs: "none" } : "none";
 					},
 					justifyContent: "center",
 					zIndex: "50",
@@ -26,7 +26,7 @@ const Header: FunctionComponent<HeaderProps> = ({}) => {
 			>
 				<Toolbar
 					variant="dense"
-					sx={{ display: "flex", justifyContent: { md: "space-between", xs: "center" }, alignItems: "center", gap: 4, mx: 2 }}
+					sx={{ display: "flex", justifyContent: { lg: "space-between", xs: "center" }, alignItems: "center", gap: 4, mx: 2 }}
 				>
 					<LeftSideNavBar />
 					<RightSideNavBar />
@@ -37,7 +37,7 @@ const Header: FunctionComponent<HeaderProps> = ({}) => {
 				sx={{
 					height: "5rem",
 					display: () => {
-						return isLoggedIn ? { md: "none", xs: "flex" } : "none";
+						return isLoggedIn ? { lg: "none", xs: "flex" } : "none";
 					},
 					justifyContent: "center",
 				}}

@@ -25,21 +25,6 @@ const RightSideNavBar: FunctionComponent<RightSideNavBarProps> = () => {
 	}
 	return (
 		<Box sx={{ display: "flex", alignItems: "flex-end", gap: 2 }}>
-			<TextField
-				id="input-with-icon-textfield"
-				label="Search field"
-				type="search"
-				color="info"
-				sx={{ color: "white" }}
-				InputProps={{
-					endAdornment: (
-						<InputAdornment position="end">
-							<SearchIcon />
-						</InputAdornment>
-					),
-				}}
-				variant="standard"
-			/>
 			<Stack
 				direction="row"
 				spacing={3}

@@ -15,7 +15,7 @@ const AboutPage: FunctionComponent<AboutPageProps> = () => {
 				timeout={850}
 				easing={{ enter: theme.transitions.easing.easeInOut }}
 			>
-				<Typography sx={{ typography: { xs: "h2", md: "h1" } }}>About Me</Typography>
+				<Typography sx={{ typography: { xs: "h2", lg: "h1" } }}>About Me</Typography>
 			</Fade>
 			<Divider />
 			<Grid
@@ -34,7 +34,7 @@ const AboutPage: FunctionComponent<AboutPageProps> = () => {
 				>
 					<Grid
 						item
-						display={{ md: "block" }}
+						display={{ lg: "block" }}
 						md={4}
 						alignSelf="center"
 					>
@@ -56,25 +56,25 @@ const AboutPage: FunctionComponent<AboutPageProps> = () => {
 					>
 						<Typography
 							marginBottom={2}
-							sx={{ typography: { xs: "h6", md: "h5" } }}
+							sx={{ typography: { xs: "h6", lg: "h5" } }}
 						>
 							Hi there! I'm a driven and enthusiastic Full Stack Developer with a passion for delivering outstanding programming solutions. I recently graduated from HackerU College and have honed my skills through hands-on projects and self-study.
 						</Typography>
 						<Typography
 							marginBottom={2}
-							sx={{ typography: { xs: "h6", md: "h5" } }}
+							sx={{ typography: { xs: "h6", lg: "h5" } }}
 						>
 							My expertise lies in Frontend development languages and frameworks like HTML, CSS, JavaScript, Angular, React, and Vue3, as well as backend technologies like Node.js, I have a strong understanding of UI/UX concepts, and enjoy collaborating with designers to create user-friendly projects.
 						</Typography>
 						<Typography
 							marginBottom={2}
-							sx={{ typography: { xs: "h6", md: "h5" } }}
+							sx={{ typography: { xs: "h6", lg: "h5" } }}
 						>
 							With a background in customer service and technical support, and experience in leading teams, I bring a well-rounded skillset to the table. I also have a proven track record of training and mentoring others, making me a valuable asset to any team.
 						</Typography>
 						<Typography
 							marginBottom={2}
-							sx={{ typography: { xs: "h6", md: "h5" } }}
+							sx={{ typography: { xs: "h6", lg: "h5" } }}
 						>
 							I'm eager to start my career as a professional developer and make a positive impact in the industry. If you're looking for a young, happy, and professional full stack developer with a passion for learning, I'm your guy!
 						</Typography>

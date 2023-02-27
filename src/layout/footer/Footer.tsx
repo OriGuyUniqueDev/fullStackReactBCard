@@ -24,7 +24,7 @@ const Footer: FunctionComponent<FooterProps> = () => {
 					backgroundColor: "transparent",
 
 					display: () => {
-						return isLoggedIn ? { md: "flex" } : "none";
+						return isLoggedIn ? { lg: "flex" } : "none";
 					},
 				}}
 			>
