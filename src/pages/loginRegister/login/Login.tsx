@@ -31,9 +31,9 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 			password: "foobar",
 		},
 		validationSchema: validationSchema,
-		onSubmit: (values) => {
+		onSubmit: async (values) => {
 			setLoading(true);
-			loginUser(values)
+			await loginUser(values)
 				?.then((res) => {
 					setLoading(false);
 					setLoggedIn(true);
