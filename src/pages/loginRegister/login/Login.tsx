@@ -38,13 +38,10 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 					setLoading(false);
 					setLoggedIn(true);
 					sessionStorage.setItem("ent", res.data.token);
-					<Navigate
-						replace
-						to={ROUTES.WELCOME}
-					/>;
 					setSnackOpen((prev) => !prev);
 					setType("success");
 					setMessage("Great You'r Logged In, We'll Direct You ⭐");
+					navigate(ROUTES.WELCOME);
 				})
 
 				.catch((err) => {
