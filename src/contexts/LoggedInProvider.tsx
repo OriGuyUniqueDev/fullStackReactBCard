@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useState, useContext, createContext, FC, useEffect } from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { Navigate, redirect, useNavigate } from "react-router-dom";
 import { useIsLoaded } from "../hooks/useIsLoaded";
 import CardType from "../interfaces/CardType";
 import UserType from "../interfaces/User";
+import ROUTES from "../routes/routesModel";
 import { getAllCards } from "../services/userCRUD";
 
 type LoggedInContextType = {
@@ -45,13 +46,24 @@ export const LoggedInProvider: FC<LoggedInProps> = ({ children }) => {
 
 					setLoggedIn(true);
 				})
-				.finally(() => navigate("/welcome", { replace: true, relative: "route" }))
+				.finally(() => (
+					<Navigate
+						replace
+						to={ROUTES.WELCOME}
+					/>
+				))
 				.catch((err) => {
 					setLoggedIn(false);
-					navigate("/", { replace: true, relative: "route" });
+					<Navigate
+						replace
+						to={ROUTES.ROOT}
+					/>;
 				});
 		setLoggedIn(false);
-		navigate("/", { replace: true, relative: "route" });
+		<Navigate
+			replace
+			to={ROUTES.ROOT}
+		/>;
 	}, [token]);
 	useEffect(() => {
 		if (token)
