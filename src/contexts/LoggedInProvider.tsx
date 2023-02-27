@@ -34,7 +34,7 @@ export const LoggedInProvider: FC<LoggedInProps> = ({ children }) => {
 	const token = sessionStorage.getItem("ent");
 
 	useEffect(() => {
-		if (token)
+		if (token) {
 			axios
 				.get("http://localhost:5000/api/login", {
 					headers: {
@@ -43,27 +43,18 @@ export const LoggedInProvider: FC<LoggedInProps> = ({ children }) => {
 				})
 				.then((res) => {
 					setUser(res.data);
-
+					navigate(ROUTES.WELCOME);
 					setLoggedIn(true);
 				})
-				.finally(() => (
-					<Navigate
-						replace
-						to={ROUTES.WELCOME}
-					/>
-				))
 				.catch((err) => {
-					setLoggedIn(false);
-					<Navigate
-						replace
-						to={ROUTES.ROOT}
-					/>;
+					// setLoggedIn(false);
+					// navigate(ROUTES.ROOT);
+					console.log(err);
 				});
-		setLoggedIn(false);
-		<Navigate
-			replace
-			to={ROUTES.ROOT}
-		/>;
+		} else {
+			setLoggedIn(false);
+			navigate(ROUTES.ROOT);
+		}
 	}, [token]);
 	useEffect(() => {
 		if (token)
