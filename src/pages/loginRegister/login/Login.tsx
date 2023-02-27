@@ -41,12 +41,11 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 					setSnackOpen((prev) => !prev);
 					setType("success");
 					setMessage("Great You'r Logged In, We'll Direct You ⭐");
-					return (
-						<Navigate
-							replace
-							to={ROUTES.WELCOME}
-						/>
-					);
+
+					<Navigate
+						replace
+						to={ROUTES.WELCOME}
+					/>;
 				})
 
 				.catch((err) => {
