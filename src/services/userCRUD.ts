@@ -5,7 +5,7 @@ import UserType from "../interfaces/User";
 
 export const registerUser = (data: UserType) => {
 	try {
-		let response = axios.post("http://127.0.0.1:5000/api/register", data);
+		let response = axios.post(`${import.meta.env.VITE_URL}/api/register`, data);
 
 		return response;
 	} catch (error) {
@@ -14,7 +14,7 @@ export const registerUser = (data: UserType) => {
 };
 export const loginUser = (data: LoginType) => {
 	try {
-		let response = axios.post("http://127.0.0.1:5000/api/login", data);
+		let response = axios.post(`${import.meta.env.VITE_URL}/api/login`, data);
 
 		return response;
 	} catch (error) {
@@ -23,7 +23,7 @@ export const loginUser = (data: LoginType) => {
 };
 export const getAllCards = async () => {
 	try {
-		let response = await axios.get("http://127.0.0.1:5000/api/getAllCards", {
+		let response = await axios.get(`${import.meta.env.VITE_URL}/api/getAllCards`, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
@@ -35,7 +35,7 @@ export const getAllCards = async () => {
 };
 export const getBizCard = async (bizCardID: string | undefined) => {
 	try {
-		let response = await axios.get(`http://127.0.0.1:5000/api/getBizCard/${bizCardID}`, {
+		let response = await axios.get(`${import.meta.env.VITE_URL}/api/getBizCard/${bizCardID}`, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
@@ -47,7 +47,7 @@ export const getBizCard = async (bizCardID: string | undefined) => {
 };
 export const addBizCard = (data: CardType) => {
 	try {
-		let response = axios.post("http://127.0.0.1:5000/api/addBizCard", data, {
+		let response = axios.post(`${import.meta.env.VITE_URL}/api/addBizCard`, data, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
@@ -60,7 +60,7 @@ export const addBizCard = (data: CardType) => {
 };
 export const getUserBizCard = (userID: string | undefined) => {
 	try {
-		let response = axios.get(`http://127.0.0.1:5000/api/getUserBizCard/${userID}`, {
+		let response = axios.get(`${import.meta.env.VITE_URL}/api/getUserBizCard/${userID}`, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
@@ -73,7 +73,7 @@ export const getUserBizCard = (userID: string | undefined) => {
 };
 export const deleteBizCard = (cardBizID: string | undefined) => {
 	try {
-		let response = axios.delete(`http://127.0.0.1:5000/api/deleteBizCard/${cardBizID}`, {
+		let response = axios.delete(`${import.meta.env.VITE_URL}/api/deleteBizCard/${cardBizID}`, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
@@ -86,7 +86,7 @@ export const deleteBizCard = (cardBizID: string | undefined) => {
 };
 export const updateBizCard = (cardBizID: string | undefined, dataToServer: any) => {
 	try {
-		let response = axios.put(`http://127.0.0.1:5000/api/updateBizCard/${cardBizID}`, dataToServer, {
+		let response = axios.put(`${import.meta.env.VITE_URL}/api/updateBizCard/${cardBizID}`, dataToServer, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
@@ -99,7 +99,7 @@ export const updateBizCard = (cardBizID: string | undefined, dataToServer: any) 
 };
 export const updateUser = (userID: string | undefined, dataToServer: any) => {
 	try {
-		let response = axios.put(`http://127.0.0.1:5000/api/updateUser/${userID}`, dataToServer, {
+		let response = axios.put(`${import.meta.env.VITE_URL}/api/updateUser/${userID}`, dataToServer, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
