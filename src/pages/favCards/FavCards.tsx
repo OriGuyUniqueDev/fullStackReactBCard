@@ -13,7 +13,7 @@ const FavCards: FunctionComponent<FavCardsProps> = () => {
 	const { isLoaded, setIsLoaded } = useIsLoaded(true);
 	const [cards, setCards] = useState<CardType[] | null>(null);
 	const [render, setRender] = useState<boolean>(false);
-	const { user } = useLoggedIn();
+	const { user, setUserUpdated } = useLoggedIn();
 	const theme = useTheme();
 
 	useEffect(() => {
@@ -23,13 +23,13 @@ const FavCards: FunctionComponent<FavCardsProps> = () => {
 				return await getBizCard(fav)
 					.then((res) => {
 						if (res?.data !== undefined) {
-							return arr?.push(res?.data);
+							arr?.push(res?.data);
+							return;
 						} else {
 							return "";
 						}
 					})
 					.catch((err) => {
-						console.log(err.response);
 						return null;
 					});
 			});
@@ -37,15 +37,14 @@ const FavCards: FunctionComponent<FavCardsProps> = () => {
 				.then((results) => {
 					// arr = results.filter((card) => card !== null) as CardType[];
 					setCards(arr);
+
 					setIsLoaded(false);
 				})
 				.catch((err) => {
 					setIsLoaded(false);
-					console.log(err);
 				});
-			user.favBiz;
 		}
-	}, []);
+	}, [user?.favBiz]);
 	return (
 		<Container>
 			<Typography
@@ -90,7 +89,6 @@ const FavCards: FunctionComponent<FavCardsProps> = () => {
 							return (
 								<Fade
 									in={true}
-									// easing={{ enter: theme.transitions.easing.easeInOut }}
 									timeout={{ enter: 500 }}
 									key={index}
 								>

@@ -47,8 +47,6 @@ export const LoggedInProvider: FC<LoggedInProps> = ({ children }) => {
 					setLoggedIn(true);
 				})
 				.catch((err) => {
-					// setLoggedIn(false);
-					// navigate(ROUTES.ROOT);
 					console.log(err);
 				});
 		} else {

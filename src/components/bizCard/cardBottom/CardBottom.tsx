@@ -22,7 +22,7 @@ const CardBottom: FunctionComponent<CardBottomProps> = ({ likes, data, isRender 
 	const [isDeleted, setDeleted] = useState(false);
 	const { setMessage, setSnackOpen, setType } = useToast();
 	const [openModal, setOpenModal] = useState(false);
-
+	data.likes?.includes(user?._id as string);
 	const { pathname } = useLocation();
 	const theme = useTheme();
 	function handleDelete() {
@@ -67,14 +67,14 @@ const CardBottom: FunctionComponent<CardBottomProps> = ({ likes, data, isRender 
 			await updateBizCard(data._id, dataToServer)
 				?.then((res) => {
 					setUserUpdated((prev) => !prev);
-					isRender((prev) => !prev);
 				})
 				.catch((err) => console.log(err.response.data));
 			await updateUser(user?._id, dataToServerFav)
 				?.then((res) => {
 					setUserUpdated((prev) => !prev);
 				})
-				.catch((err) => console.log(err.response.data));
+				.catch((err) => console.log(err.response.data))
+				.finally(() => isRender((prev) => !prev));
 			return;
 		} else {
 			uniqueSet.add(user?._id as string);
@@ -134,7 +134,7 @@ const CardBottom: FunctionComponent<CardBottomProps> = ({ likes, data, isRender 
 						badgeContent={likes}
 						color="secondary"
 					>
-						<FavoriteIcon />
+						<FavoriteIcon color={data.likes?.includes(user?._id as string) ? "error" : "info"} />
 					</Badge>
 				</Button>
 			</CardActions>

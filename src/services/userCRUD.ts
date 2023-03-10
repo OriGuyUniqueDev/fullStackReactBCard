@@ -5,7 +5,7 @@ import UserType from "../interfaces/User";
 
 export const registerUser = (data: UserType) => {
 	try {
-		let response = axios.post("https://reactbizcardserverside.onrender.com/api/register", data);
+		let response = axios.post("http://127.0.0.1:5000/api/register", data);
 
 		return response;
 	} catch (error) {
@@ -14,7 +14,7 @@ export const registerUser = (data: UserType) => {
 };
 export const loginUser = (data: LoginType) => {
 	try {
-		let response = axios.post("https://reactbizcardserverside.onrender.com/api/login", data);
+		let response = axios.post("http://127.0.0.1:5000/api/login", data);
 
 		return response;
 	} catch (error) {
@@ -23,7 +23,7 @@ export const loginUser = (data: LoginType) => {
 };
 export const getAllCards = async () => {
 	try {
-		let response = await axios.get("https://reactbizcardserverside.onrender.com/api/getAllCards", {
+		let response = await axios.get("http://127.0.0.1:5000/api/getAllCards", {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
@@ -35,7 +35,7 @@ export const getAllCards = async () => {
 };
 export const getBizCard = async (bizCardID: string | undefined) => {
 	try {
-		let response = await axios.get(`https://reactbizcardserverside.onrender.com/api/getBizCard/${bizCardID}`, {
+		let response = await axios.get(`http://127.0.0.1:5000/api/getBizCard/${bizCardID}`, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
@@ -47,7 +47,7 @@ export const getBizCard = async (bizCardID: string | undefined) => {
 };
 export const addBizCard = (data: CardType) => {
 	try {
-		let response = axios.post("https://reactbizcardserverside.onrender.com/api/addBizCard", data, {
+		let response = axios.post("http://127.0.0.1:5000/api/addBizCard", data, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
@@ -60,7 +60,7 @@ export const addBizCard = (data: CardType) => {
 };
 export const getUserBizCard = (userID: string | undefined) => {
 	try {
-		let response = axios.get(`https://reactbizcardserverside.onrender.com/api/getUserBizCard/${userID}`, {
+		let response = axios.get(`http://127.0.0.1:5000/api/getUserBizCard/${userID}`, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
@@ -73,7 +73,7 @@ export const getUserBizCard = (userID: string | undefined) => {
 };
 export const deleteBizCard = (cardBizID: string | undefined) => {
 	try {
-		let response = axios.delete(`https://reactbizcardserverside.onrender.com/api/deleteBizCard/${cardBizID}`, {
+		let response = axios.delete(`http://127.0.0.1:5000/api/deleteBizCard/${cardBizID}`, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
@@ -86,7 +86,7 @@ export const deleteBizCard = (cardBizID: string | undefined) => {
 };
 export const updateBizCard = (cardBizID: string | undefined, dataToServer: any) => {
 	try {
-		let response = axios.put(`https://reactbizcardserverside.onrender.com/api/updateBizCard/${cardBizID}`, dataToServer, {
+		let response = axios.put(`http://127.0.0.1:5000/api/updateBizCard/${cardBizID}`, dataToServer, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
@@ -99,7 +99,7 @@ export const updateBizCard = (cardBizID: string | undefined, dataToServer: any) 
 };
 export const updateUser = (userID: string | undefined, dataToServer: any) => {
 	try {
-		let response = axios.put(`https://reactbizcardserverside.onrender.com/api/updateUser/${userID}`, dataToServer, {
+		let response = axios.put(`http://127.0.0.1:5000/api/updateUser/${userID}`, dataToServer, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem("ent")}`,
 			},
