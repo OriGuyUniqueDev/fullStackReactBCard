@@ -55,6 +55,25 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 	const handleClickLogin = () => {
 		setLogin(false);
 	};
+	const handleLoginAsGuest = async () => {
+		await loginUser({ email: "demo1@demo.com", password: "12345678" })
+			?.then((res) => {
+				setLoading(false);
+				setLoggedIn(true);
+				sessionStorage.setItem("ent", res.data.token);
+				setSnackOpen((prev) => !prev);
+				setType("success");
+				setMessage("Welcome Enjoy");
+				navigate(ROUTES.WELCOME);
+			})
+
+			.catch((err) => {
+				setMessage(err.response.data);
+				setSnackOpen((prev) => !prev);
+				setType("error");
+				setLoading(false);
+			});
+	};
 
 	return (
 		<Grid
@@ -131,6 +150,18 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 						disabled={formik.dirty && !formik.isValid}
 					>
 						{isLoading ? <CircularProgress color="info" /> : "Sign In"}
+					</Button>
+					<Button
+						type="button"
+						fullWidth
+						variant="outlined"
+						size="small"
+						id="loginAsGuest"
+						sx={{ mt: 3, mb: 2, paddingBlock: 2 }}
+						disabled={formik.dirty && !formik.isValid}
+						onClick={handleLoginAsGuest}
+					>
+						{isLoading ? <CircularProgress color="info" /> : "Login as Guest"}
 					</Button>
 				</Box>
 			</Box>
