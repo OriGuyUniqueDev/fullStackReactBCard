@@ -40,7 +40,7 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 					sessionStorage.setItem("ent", res.data.token);
 					setSnackOpen((prev) => !prev);
 					setType("success");
-					setMessage("Great You'r Logged In ⭐");
+					setMessage("Welcome to Control");
 					navigate(ROUTES.WELCOME);
 				})
 
@@ -63,7 +63,7 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 				sessionStorage.setItem("ent", res.data.token);
 				setSnackOpen((prev) => !prev);
 				setType("success");
-				setMessage("Welcome Enjoy");
+				setMessage("Welcome to Control");
 				navigate(ROUTES.WELCOME);
 			})
 
