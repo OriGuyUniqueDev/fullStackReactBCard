@@ -49,7 +49,7 @@ const UserInfo: FunctionComponent<UserInfoProps> = ({ formik }) => {
 				<TextField
 					margin="normal"
 					required
-					type="text"
+					type="password"
 					id="password"
 					label="Password"
 					name="password"
@@ -70,7 +70,7 @@ const UserInfo: FunctionComponent<UserInfoProps> = ({ formik }) => {
 				<TextField
 					margin="normal"
 					required
-					type="text"
+					type="password"
 					id="confirmPassword"
 					label="Confirm Password"
 					name="confirmPassword"
