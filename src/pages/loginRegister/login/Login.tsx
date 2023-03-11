@@ -157,7 +157,7 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 						variant="outlined"
 						size="small"
 						id="loginAsGuest"
-						sx={{ mt: 3, mb: 2, paddingBlock: 2 }}
+						sx={{ mt: 0, mb: 2, paddingBlock: 2 }}
 						onClick={handleLoginAsGuest}
 					>
 						{isLoading ? <CircularProgress color="info" /> : "Login as Guest"}
