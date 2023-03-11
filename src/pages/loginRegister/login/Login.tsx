@@ -158,7 +158,6 @@ const Login: FunctionComponent<LoginProps> = ({ setLogin }) => {
 						size="small"
 						id="loginAsGuest"
 						sx={{ mt: 3, mb: 2, paddingBlock: 2 }}
-						disabled={formik.dirty && !formik.isValid}
 						onClick={handleLoginAsGuest}
 					>
 						{isLoading ? <CircularProgress color="info" /> : "Login as Guest"}
