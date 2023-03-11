@@ -36,7 +36,7 @@ export const LoggedInProvider: FC<LoggedInProps> = ({ children }) => {
 	useEffect(() => {
 		if (token) {
 			axios
-				.get("http://localhost:5000/api/login", {
+				.get(`${import.meta.env.VITE_URL}/api/login`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
@@ -57,7 +57,7 @@ export const LoggedInProvider: FC<LoggedInProps> = ({ children }) => {
 	useEffect(() => {
 		if (token)
 			axios
-				.get("http://localhost:5000/api/login", {
+				.get(`${import.meta.env.VITE_URL}/api/login`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
